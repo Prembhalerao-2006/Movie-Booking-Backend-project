@@ -49,6 +49,11 @@ const getMovie = async (req, res) => {
 const updateMovie = async (req, res) => {
     try {
         const response = await MovieService.updateMovie(req.params._id, req.body);  
+        if(response.error){
+            errorResponseBody.error = response.error;
+            errorResponseBody.message = 'the updates that we are trying to make are not valid';
+            return res.status(response.code).json(errorResponseBody);
+        }
         successResponseBody.data = response;
         return res.status(200).json(successResponseBody);
     } catch (error) {
@@ -56,9 +61,28 @@ const updateMovie = async (req, res) => {
         return res.status(500).json(errorResponseBody);
     }
 }
+
+const getMovies = async (req, res) => {
+
+    try {
+        const response = await MovieService.fetchMovies(req.query);
+        if(response.error){
+            errorResponseBody.error = response.error;
+            return res.status(response.code).json(errorResponseBody);
+        }
+        successResponseBody.data = response;
+        return res.status(200).json(successResponseBody);
+    } catch (error) {
+        console.log(error);
+        errorResponseBody.error = error.message;
+        return res.status(500).json(errorResponseBody);
+        
+    }
+}
 module.exports = {
     createMovie,
     deleteMovie,
     getMovie,
-    updateMovie
+    updateMovie,
+    getMovies
 }
