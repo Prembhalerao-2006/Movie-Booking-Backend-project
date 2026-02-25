@@ -45,8 +45,20 @@ const getMovie = async (req, res) => {
         return res.status(500).json(errorResponseBody);
     }
 }
+
+const updateMovie = async (req, res) => {
+    try {
+        const response = await MovieService.updateMovie(req.params._id, req.body);  
+        successResponseBody.data = response;
+        return res.status(200).json(successResponseBody);
+    } catch (error) {
+        errorResponseBody.error = error.message;
+        return res.status(500).json(errorResponseBody);
+    }
+}
 module.exports = {
     createMovie,
     deleteMovie,
-    getMovie
+    getMovie,
+    updateMovie
 }

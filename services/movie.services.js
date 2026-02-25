@@ -16,11 +16,18 @@ const getMovieById = async (id) =>{
         return {
             error: 'No movie found for the given id',
         }
-};
+    };
 return movie;
+}
+
+const updateMovie = async (id, data) => {
+    const movie = await Movie.findByIdAndUpdate(id, data, {new: true , runValidators: true});
+    return movie;
 }
 
 module.exports = {
     createMovie,
     getMovieById,   
+    updateMovie,
+    deleteMovie
 }
