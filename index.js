@@ -4,6 +4,7 @@ const env = require('dotenv');
 const mongoose = require('mongoose');
 
 const MovieRoutes = require('./routes/movie.routes');
+const theatreRoutes = require('./routes/theatre.routes'); 
 
 
 const app = express();
@@ -13,13 +14,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 MovieRoutes(app);
+theatreRoutes(app);
 
-app.get('/home', (req, res) => {
-    return res.json({
-        success: true,
-        message:'fetch home'
-    })
-})
+// app.get('/home', (req, res) => {
+//     return res.json({
+//         success: true,
+//         message:'fetch home'
+//     })
+// })
 app.listen(process.env.PORT || 3000, async () => {
   const port = process.env.PORT || 3000;
   console.log(`Server is running on port ${port} !!`);
