@@ -16,10 +16,24 @@ const validateMovieCreateRequest = (req, res, next) => {
         return res.status(400).json(badRequestResponse);
     }
 
-    if(!req.body.casts || !Array.isArray(req.body.casts)){
+    if(!req.body.casts || !Array.isArray(req.body.casts) || req.body.casts.length <= 0){
         badRequestResponse.error = 'The casts of the movie is not present in the request sent or it is not an array';
         return res.status(400).json(badRequestResponse);
     }
+
+    if(!req.body.trailerUrl){
+        badRequestResponse.error = 'The trailerUrl of the movie is not present in the request sent';
+        return res.status(400).json(badRequestResponse);
+    }
+    if(!req.body.releaseDate){
+        badRequestResponse.error = 'The releaseDate of the movie is not present in the request sent';
+        return res.status(400).json(badRequestResponse);
+    }
+    if(!req.body.director){
+        badRequestResponse.error = 'The director of the movie is not present in the request sent';
+        return res.status(400).json(badRequestResponse);
+    }
+    next();
 }
 
 module.exports = {
