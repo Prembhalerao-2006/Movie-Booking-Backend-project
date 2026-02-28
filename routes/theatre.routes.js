@@ -18,6 +18,11 @@ const routes = (app) => {
         theatreController.getTheatre
     )
 
+    app.get(
+        '/mba/api/v1/theatres',
+        theatreController.getTheatres
+    )
+ 
 
 };
 
