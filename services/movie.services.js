@@ -24,18 +24,39 @@ const createMovie = async (data) => {
 }
 
 const deleteMovie = async (id) => {
-    const response = await Movie.findByIdAndDelete(id);
-    return response;
+    try {
+        const response = await Movie.findByIdAndDelete(id);
+        if (!response) {
+            return {
+                error: 'No movie found for the given id',
+                code: 404
+            };
+        }
+        return response;
+    } catch (error) {
+        return {
+            error: error.message,
+            code: 500
+        };
+    }
 }
 
-const getMovieById = async (id) =>{
-    const movie = awaitMovie.findById(id);
-    if(!movie){
-        return {
-            error: 'No movie found for the given id',
+const getMovieById = async (id) => {
+    try {
+        const movie = await Movie.findById(id);
+        if (!movie) {
+            return {
+                error: 'No movie found for the given id',
+                code: 404
+            };
         }
-    };
-return movie;
+        return movie;
+    } catch (error) {
+        return {
+            error: error.message,
+            code: 500
+        };
+    }
 }
 
 const updateMovie = async (id, data) => {
