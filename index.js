@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 MovieRoutes(app);
 theatreRoutes(app);
+theatreRoutes(app);
 
 // app.get('/home', (req, res) => {
 //     return res.json({
