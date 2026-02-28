@@ -27,8 +27,13 @@ const deleteTheatre = async (id) => {
         }
         return response;
     } catch (error) {
+        if (error.name === 'CastError' && error.kind === 'ObjectId') {
+            return {
+                err: 'No record found with the given id',
+                code: 404
+            }
+        }
         throw error;
-        
     }
 }
 
@@ -43,9 +48,14 @@ const getTheatre = async (id) => {
         }
         return response;
     } catch (error) {
+        if (error.name === 'CastError' && error.kind === 'ObjectId') {
+            return {
+                err: 'No record found with the given id',
+                code: 404
+            }
+        }
         console.log(error);
         throw error;
-        
     }
 }
 
