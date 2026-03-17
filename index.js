@@ -30,16 +30,7 @@ app.listen(process.env.PORT || 3000, async () => {
   try {
     await mongoose.connect(process.env.DB_URL);
     console.log('Connected to MongoDB');
-    // await Movie.create({
-    //     name:'Avengers',
-    //     description:'This is Avengers movie',
-    //     casts:['Robert Downey Jr.','Chris Evans','Scarlett Johansson'],
-    //     trailerUrl:'https://www.youtube.com/watch?v=6ZfuNTqbHE8',
-    //     language:'english',
-    //     releaseDate:'2012-04-11',
-    //     director:'Joss Whedon',
-    //     releasesStatus:'RELEASED'
-    // });
+    
   } catch (error) {
     console.error('MongoDB connection error:', error);
   }
