@@ -22,7 +22,16 @@ const routes = (app) => {
         '/mba/api/v1/theatres',
         theatreController.getTheatres
     )
- 
+    
+    app.patch(
+        'mba/api/v1/theatres/:id/movies',
+        theatreController.updateMovies
+    )
+
+    app.patch(
+        'mba/api/v1/theatres/:id',
+        theatreController.updateTheatre
+    )
 
 };
 
