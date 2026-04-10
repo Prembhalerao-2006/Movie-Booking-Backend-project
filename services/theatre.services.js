@@ -69,6 +69,30 @@ const getAllTheatres = async () => {
         
     }
 }
+const updateTheatre = async (id, data) =>{
+    try{
+        const response = await Theatre.findByIdAndUpdate(id,data,{
+            new: true, runValidators: true
+        
+        });
+        if(!response){
+            return {
+                err: 'No record found with given id',
+                code: 404
+            }
+    }
+    return response;
+    } catch (err) {
+        if(err.name === 'ValidationError' && err.errors){
+            let err = {};
+            Object.keys(err.errors).forEach((key) => {
+                err[key] = err.errors[key].message;
+            });
+            return { err, code: 422 };
+        }
+        throw err;
+    }
+}
 
 const updateMoviesInTheatres = async(theatreId, movieIds, insert) =>{
     if(!theatre){
@@ -98,5 +122,7 @@ module.exports = {
     deleteTheatre,
     getTheatre,
     getAllTheatres,
+    updateTheatre,
+    updateMoviesInTheatres
     
 }
